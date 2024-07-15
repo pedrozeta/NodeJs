@@ -1,11 +1,14 @@
 import express from 'express';
 import pool from './config/db.js';
+import 'dotenv/config';
 
 const app = express();
+const puerto = process.env.PORT || 3000;
 
 //middlewares
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
+app.use(express.static('public'));
 
 // LEER TODO
 app.get('/usuarios', async (req, res) => {
@@ -125,6 +128,6 @@ app.get('/usuarios/borrar/:id', async (req, res) => {
 
 
 
-app.listen(3000, () => {
+app.listen(puerto, () => {
     console.log('El servidor está funcionando en el puerto 3000');
 });
